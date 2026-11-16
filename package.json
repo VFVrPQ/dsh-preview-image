@@ -1,0 +1,90 @@
+{
+  "name": "dsh-preview-image",
+  "version": "0.1.0",
+  "description": "Image preview for DeepSeek Harness with real zoom, pan, fit modes, rotation and full screen in the right-Sidebar document preview, plus a zoomable full-screen viewer for images in the conversation.",
+  "type": "module",
+  "license": "MIT",
+  "author": "VFVrPQ",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "preview",
+    "image",
+    "zoom",
+    "fullscreen"
+  ],
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/**/*.js",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh.md",
+    "CHANGELOG.md",
+    "VERIFY.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+        "@deepseek-ai/dsh-client-ui-sidebar-right"
+      ]
+    },
+    "preview": {
+      "capability": "image",
+      "kind": "media",
+      "extensions": [
+        "png",
+        "jpg",
+        "jpeg",
+        "jfif",
+        "gif",
+        "webp",
+        "avif",
+        "bmp",
+        "ico",
+        "svg"
+      ],
+      "requires": []
+    },
+    "compatibility": {
+      "dshReleases": {
+        "0.2.0-rc.2": "compatible",
+        "0.2.1-rc.2": "compatible",
+        "0.2.2-rc.1": "compatible"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VFVrPQ/dsh-preview-image.git"
+  },
+  "homepage": "https://github.com/VFVrPQ/dsh-preview-image#readme",
+  "bugs": {
+    "url": "https://github.com/VFVrPQ/dsh-preview-image/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  }
+}

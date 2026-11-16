@@ -1,0 +1,8 @@
+# dsh-preview-image bundle patch: one plugin row, no config.
+#
+# All work happens in the browser half (the image renderer and the lightbox
+# layer). The Host entry exists only so the package has a bundle row to mount.
+
+- insert:
+    - id: preview-image
+      name: dsh-preview-image
