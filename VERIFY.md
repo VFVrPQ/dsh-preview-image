@@ -113,3 +113,15 @@ The “before” profile was `@deepseek-ai/dsh-base` + `@deepseek-ai/dsh-web-app
   leaves the image message visible.
 - Touch-screen pinch, multi-image galleries and dragging the previewed file into the composer — the plugin does
   not implement them (see README limitations).
+
+## Release ledger
+
+| Item | Value |
+|---|---|
+| npm | `dsh-preview-image@0.1.1` (latest; tarball sha1 `615fa2aa8e12757d68b2fee5c0f573f4d6c77a46`) |
+| GitHub | `VFVrPQ/dsh-preview-image`, tag `v0.1.1` |
+| Ticket PR | `439436269-ctrl/superagent-sandbox#49` |
+| Preview market | `439436269-ctrl/dsh-preview-market#1` — one catalog file plus the regenerated `catalog.json`; open when this ledger was written, its CI waits for the owner's approval, and a new `dsh-preview-market` release publishes the card |
+| Portfolio | `439436269-ctrl/portfolio#1` — station 08 `DSH 插件集` npm chip; open, Pages publishes after merge |
+| Feishu | 开发项目 record `reczz28aK1PLSIvo` |
+
