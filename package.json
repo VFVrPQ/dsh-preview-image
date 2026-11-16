@@ -1,6 +1,6 @@
 {
   "name": "dsh-preview-image",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Image preview for DeepSeek Harness with real zoom, pan, fit modes, rotation and full screen in the right-Sidebar document preview, plus a zoomable full-screen viewer for images in the conversation.",
   "type": "module",
   "license": "MIT",

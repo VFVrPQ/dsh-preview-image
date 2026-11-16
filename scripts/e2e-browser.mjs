@@ -101,6 +101,41 @@ try {
   const rotated = await page.locator(`${viewer} [data-preview-image-frame]`).evaluate((el) => el.style.transform);
   check("rotate adds 90 degrees", /rotate\(90deg\)/.test(rotated), rotated);
 
+  // Fit is a request, not just a mode: it must recover after a rotation and
+  // after a pan even while the mode already reports "fit".
+  const frameSelector = `${viewer} [data-preview-image-frame]`;
+  const frameTransform = () => page.locator(frameSelector).evaluate((el) => el.style.transform);
+  const centered = async () => /translate\(0px, 0px\)/.test(await frameTransform());
+  await page.locator(`${viewer} [data-action="fit"]`).click();
+  await page.waitForTimeout(300);
+  const fitBefore = await percent(viewer);
+  await page.locator(`${viewer} [data-action="rotate"]`).click();
+  await page.waitForTimeout(400);
+  const fitRotated = await percent(viewer);
+  check("fit follows the rotated orientation", fitRotated !== fitBefore, { fitBefore, fitRotated });
+  check("rotation keeps the image centered", await centered(), await frameTransform());
+
+  const fitStage = await page.locator(`${viewer} [data-preview-image-stage]`).boundingBox();
+  await page.mouse.move(fitStage.x + fitStage.width / 2, fitStage.y + fitStage.height / 2);
+  await page.mouse.wheel(0, 260);
+  await page.waitForTimeout(400);
+  check("wheel pans in fit mode", !(await centered()), await frameTransform());
+  await page.locator(`${viewer} [data-action="fit"]`).click();
+  await page.waitForTimeout(300);
+  check("Fit recenters after a pan", await centered(), await frameTransform());
+
+  await page.locator(`${viewer} [data-action="actual-size"]`).click();
+  await page.waitForTimeout(300);
+  await page.mouse.move(fitStage.x + fitStage.width / 2, fitStage.y + fitStage.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(fitStage.x + fitStage.width / 2 - 80, fitStage.y + fitStage.height / 2 - 40, { steps: 5 });
+  await page.mouse.up();
+  await page.waitForTimeout(300);
+  check("1:1 pans", !(await centered()), await frameTransform());
+  await page.locator(`${viewer} [data-action="actual-size"]`).click();
+  await page.waitForTimeout(300);
+  check("1:1 recenters after a pan", await centered(), await frameTransform());
+
   await page.locator(`${viewer} [data-action="fullscreen"]`).click();
   await page.waitForTimeout(700);
   const full = await page.evaluate(() => document.fullscreenElement !== null);

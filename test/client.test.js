@@ -88,6 +88,14 @@ test("scale helpers clamp and fit without enlarging", () => {
   assert.equal(exports.fitScale("fit", { w: 1000, h: 900 }, stage, 0), 300 / 900);
   assert.equal(exports.fitScale("actual", { w: 1000, h: 900 }, stage, 0), 1);
   assert.equal(exports.fitScale("fit", { w: 0, h: 0 }, stage, 0), 1);
+  // A quarter turn swaps which axis limits the fit.
+  const portrait = { w: 720, h: 1280 };
+  const pane = { w: 600, h: 760 };
+  assert.equal(exports.fitScale("fit", portrait, pane, 0, 0), 760 / 1280);
+  assert.equal(exports.fitScale("fit", portrait, pane, 0, 90), 600 / 1280);
+  assert.equal(exports.fitScale("fit-width", portrait, pane, 0, 90), 600 / 1280);
+  assert.equal(exports.fitScale("fit", portrait, pane, 0, 270), 600 / 1280);
+  assert.equal(exports.fitScale("fit", portrait, pane, 0, 180), 760 / 1280);
 });
 
 test("rotation swaps the half extents a pan clamp sees", () => {

@@ -1,4 +1,4 @@
-# Verification — dsh-preview-image 0.1.0
+# Verification — dsh-preview-image 0.1.1
 
 Everything below was run on 2026-11-16 on Windows 11 (ARM64), Node 24.22.1, Chrome 157.0.8103.51 driven by
 Playwright 1.64.1, against the DSH desktop runtime 0.2.2-rc.1 (`@deepseek-ai/dsh-base` + `@deepseek-ai/dsh-web-app`
@@ -18,6 +18,7 @@ node --test test/*.test.js
 - the bundle requires only `react` and `react-dom` from the loader's platform modules;
 - path/name/media-type helpers, including the AVIF/JFIF additions and SVG staying text-readable;
 - fit modes never enlarge past 100%, and `actual` is exactly 1;
+- a quarter-turn rotation swaps the axes used by the fit (720×1280 at 90° fits by width, at 0°/180° by height);
 - rotation swaps the half extents used by the pan clamp;
 - pan clamping keeps a small image fully visible and a large one gap-free;
 - zoom-at-pointer keeps the image point under the cursor and is reversible;
@@ -26,6 +27,9 @@ node --test test/*.test.js
 - the zh/en dictionaries carry identical keys;
 - package shape: `dsh.bundle`, `dsh.client`, `files` globs, no host packages in `dependencies`, one patch row
   named after the package, and a host half with no injected services.
+
+A regression check for the 0.1.1 fix is in the browser E2E: Fit is a request rather than a mode value, so it
+recenters after a wheel pan and refits for a rotated orientation even while the mode already reports `fit`.
 
 ## Real-app end-to-end
 
@@ -49,6 +53,11 @@ session's workspace. The same session, workspace, viewport and theme were used f
 | 1:1 shows 100% | PASS |
 | fit width is between fit and 100% (85%) | PASS |
 | rotate adds `rotate(90deg)` | PASS |
+| fit follows the rotated orientation (58% at 0°/180°, 44% at 90°/270° on a 720×1280 image) | PASS |
+| a rotation in fit mode stays centered | PASS |
+| plain-wheel pan works in fit mode | PASS |
+| Fit recenters after a wheel pan (same mode value) | PASS |
+| 1:1 pans with a drag, and 1:1 recenters it | PASS |
 | full screen uses the Fullscreen API or the fallback | PASS (API) |
 | Escape exits full screen | PASS |
 | dragging pans the image | PASS (translate changes) |

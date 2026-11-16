@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.1 — 2026-11-16
+
+- **Fix Fit / Fit width / 1:1 doing nothing when the view had drifted inside the same mode.** They now
+  issue a re-fit request, so Fit recenters after a wheel pan and 1:1 recenters after a drag, even though the
+  mode value did not change.
+- **A rotation in a fit mode re-fits for the rotated orientation**: a quarter turn swaps which axis limits the
+  fit, and `Fit` uses the rotated dimensions.
+- Page-mode wheel events (`deltaMode === 2`) pan by a page instead of one pixel; line-mode stays 16 px.
+- Holding `F`, `R`, `0` or `1` no longer flips the state on key auto-repeat.
+- Drop a dead document-body prop branch (`props.meta`); the path always comes from `resourceAddress`.
+
 ## 0.1.0 — 2026-11-16
 
 First release.
