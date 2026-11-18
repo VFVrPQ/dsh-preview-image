@@ -21,6 +21,8 @@ dsh plugin --profile <profile> add dsh-preview-image
 
 Restart the desktop app (a profile patch change is read at boot). No configuration is required.
 
+The `desktop` profile is managed by the Electron app, so `dsh plugin --profile desktop add …` is rejected there; install through the app's plugin manager for desktop. The command above applies to custom profiles.
+
 To check it loaded, open any image from the Files tab: the pane shows the toolbar instead of the bare built-in image view. Clicking an image in the conversation (or on a composer attachment) opens the zoomable lightbox instead of the built-in one.
 
 ## Before / after

@@ -121,7 +121,8 @@ The “before” profile was `@deepseek-ai/dsh-base` + `@deepseek-ai/dsh-web-app
 | npm | `dsh-preview-image@0.1.1` (latest; tarball sha1 `615fa2aa8e12757d68b2fee5c0f573f4d6c77a46`) |
 | GitHub | `VFVrPQ/dsh-preview-image`, tag `v0.1.1` |
 | Ticket PR | `439436269-ctrl/superagent-sandbox#49` |
-| Preview market | `439436269-ctrl/dsh-preview-market#1` — one catalog file plus the regenerated `catalog.json`; open when this ledger was written, its CI waits for the owner's approval, and a new `dsh-preview-market` release publishes the card |
-| Portfolio | `439436269-ctrl/portfolio#1` — station 08 `DSH 插件集` npm chip; open, Pages publishes after merge |
+| Preview market | `439436269-ctrl/dsh-preview-market#1` — one catalog file plus the regenerated `catalog.json`; merged 2026-11-18 (merge `9768707`), and `dsh-preview-market@0.1.12` is live on npm with this entry. The app's preview-market plugin must be updated to 0.1.12 (through the app, not the CLI) before the card appears |
+| Portfolio | `439436269-ctrl/portfolio#1` — station 08 `DSH 插件集` npm chip; merged 2026-11-18 (merge `ccbed69`), CI and Pages succeeded, the live page carries the chip |
+| Official directory | `awesome-dsh-plugin/awesome-dsh-plugin#16603` — submitted 2026-11-18; `check` queued / maintainer review |
 | Feishu | 开发项目 record `reczz28aK1PLSIvo` |
 

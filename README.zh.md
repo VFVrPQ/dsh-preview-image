@@ -21,6 +21,8 @@ dsh plugin --profile <profile> add dsh-preview-image
 
 重启桌面端（profile 补丁在启动时读取）。没有配置项。
 
+`desktop` profile 由 Electron 应用独占管理，`dsh plugin --profile desktop add …` 会被拒绝；桌面端请在应用的插件管理器里安装。上面的命令适用于自定义 profile。
+
 验证：从「文件」页签打开任意图片，右侧面板会出现常驻工具栏；点击对话里的图片或输入框里的附件缩略图，会打开可缩放的灯箱，而不是内置灯箱。
 
 ## 前后对照
